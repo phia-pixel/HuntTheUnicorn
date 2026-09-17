@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hunt the Unicorn</title>
+    <link rel = "stylesheet" href =  "style.css">
+    <link
+        rel="icon"
+        type="image/x-icon"
+        href="images/favicon.ico">
+</head>
+
+<body>
+ <div id="unicornbase"></div>
+
+ <script>
+    var sprite = document.getElementById("unicornbase");
+    var idleImage = "images/unicornbase.PNG";
+    var runFrames = [
+        "images/unicornrun1.PNG",
+        "images/unicornrun2.png",
+        "images/unicornrun3.png",
+        "images/unicornrun4.png",
+        "images/unicornrun5.png"
+    ];
+
+    var runSound = new Audio("sound/Horse ISS740.mp3");
+
+    var currentFrame = 0;
+    var spriteX = window.innerWidth / 2;
+    var spriteY = window.innerHeight / 2;
+    var speed = 50;
+    var detectionRadiusX = 250;
+    var detectionRadiusY = 220;
+
+    sprite.style.backgroundImage = "url('" + idleImage + "'')";
+
+    moveSprite();
+    document.onmousemove = function(event) {
+        var mouseX = event.clientX;
+        var mouseY = event.clientY;
+        var isMoving = false;
+        var diffX = spriteX - mouseX;
+        if (diffX < 120 && diffX > -120) {
+            isMoving = true;
+            if (diffX > 0) {
+            spriteX = spriteX + speed;
+            sprite.style.transform = "scaleX(-1)";
+         } else {
+            spriteX = spriteX - speed;
+            sprite.style.transform = "scaleX(1)";
+         }
+        }
+
+        var diffY = spriteY - mouseY;
+        if (diffY < 100 && diffY > -100) {
+           isMoving = true;
+           if (diffY > 0) {
+            spriteY = spriteY + speed;
+         } else {
+            spriteY = spriteY - speed;
+         }
+        }
+
+        if (isMoving) {
+            currentFrame = currentFrame + 1;
+            if (currentFrame >= runFrames.length) {
+                currentFrame = 0;
+            }
+                sprite.style.backgroundImage = "url('" + runFrames[currentFrame] + "')";
+             } else {
+                sprite.style.backgroundImage = "url('" + idleImage + "')";
+            }
+    
+        keepInBounds();
+     moveSprite();
+    };
+
+    function moveSprite() {
+        sprite.style.left = (spriteX - 32) + "px";
+        sprite.style.top = (spriteY - 32) + "px";
+    }
+
+    function keepInBounds() {
+        if (spriteX < 32) { spriteX = 32; }
+        if (spriteX > window.innerWidth - 32) { spriteX = window.innerWidth - 32; }
+        if (spriteY < 32) { spriteY = 32; }
+        if (spriteY > window.innerHeight - 32) { spriteY = window.innerHeight - 32; }
+    }
+
+ </script>
+</body>
+</html>
