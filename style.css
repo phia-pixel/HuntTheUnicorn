@@ -1,4 +1,9 @@
 body {
+        background-image: url(assets/images/Tapestry.png);
+        background-repeat: no-repeat;
+        background-position-x: center;
+        background-size: 80%;
+        background-attachment: local;
         background-color: #121212;
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         margin: 0;
