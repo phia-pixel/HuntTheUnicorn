@@ -5,9 +5,49 @@ body {
         background-size: 80%;
         background-attachment: local;
         background-color: #121212;
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-family: "Cinzel Decorative", "Cinzel", "Times New Roman", Georgia, serif;
         margin: 0;
         overflow: hidden;    
+    }
+
+#intro-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #121212;
+        color: #f2f1e9;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        font-family: "Cinzel Decorative", "Cinzel", "Times New Roman", Georgia, serif;
+        text-align: center;
+    }
+
+#intro-text {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        transition: all 0.4s ease;
+    }
+
+#intro-btn {
+        font-family: "Cinzel Decorative", "Cinzel", "Times New Roman", Georgia, serif;
+        font-size: 20px;
+        padding: 10px 25px;
+        cursor: pointer;
+        background-color: #f2f1e9;
+        color: #121212;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.2s;
+    }
+
+#intro-btn:hover {
+        background-color: #ddd;
     }
 
 #unicornbase {
