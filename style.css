@@ -1,6 +1,12 @@
+@font-face {
+    font-family: myFont;
+    src: url(assets/font/teutonic1.ttf);
+}
+
 body {
         background-color: #121212;
-        font-family: "Cinzel Decorative", "Cinzel", "Times New Roman", Georgia, serif;
+        font-family: myFont;
+        src: url(assets/font/teutonic1.ttf);
         margin: 0;
         overflow: hidden;    
     }
@@ -31,7 +37,7 @@ body {
         justify-content: center;
         align-items: center;
         z-index: 9999;
-        font-family: "Cinzel Decorative", "Cinzel", "Times New Roman", Georgia, serif;
+        font-family: myFont;
         text-align: center;
     }
 
