@@ -70,53 +70,51 @@
         var mouseY = event.clientY - tapestryRect.top;
         var isMoving = false;
         var diffX = spriteX - mouseX;
+        var diffY = spriteY - mouseY;
         if (diffX < 120 && diffX > -120) {
             isMoving = true;
             if (diffX > 0) {
-            spriteX = spriteX + speed;
+            spriteX += speed;
             sprite.style.transform = "scaleX(-1)";
          } else {
-            spriteX = spriteX - speed;
+            spriteX -= speed;
             sprite.style.transform = "scaleX(1)";
          }
         }
 
-        var diffY = spriteY - mouseY;
         if (diffY < 100 && diffY > -100) {
            isMoving = true;
            if (diffY > 0) {
-            spriteY = spriteY + speed;
+            spriteY += speed;
          } else {
-            spriteY = spriteY - speed;
+            spriteY -= speed;
          }
         }
 
-        if (isMoving) {
-           if (animationTimer === null) {
-            animationTimer = setInterval(function() {
-            currentFrame++;
-            if (currentFrame >= runFrames.length) {
-                 currentFrame = 0;
-            }
-
-            sprite.style.backgroundImage =
-                "url('" + runFrames[currentFrame] + "')";
-            }, animationSpeed);
-            }
-            } else {
-           if (animationTimer !== null) {
-           clearInterval(animationTimer);
-           animationTimer = null;
-            }
-
-            currentFrame = 0;
-            sprite.style.backgroundImage = "url('" + idleImage + "')";
-            }
-    
         keepInBounds();
-     moveSprite();
+
+        if (isMoving) {
+            nextRunFrame();
+        } else {
+            currentFrame = 0;
+            
+            sprite.style.backgroundImage = 
+                "url('" + idleImage + "')";
+        }
+        
+        moveSprite();
     };
 
+    function nextRunFrame() {
+        sprite.style.backgroundImage = 
+            "url('" + runFrames[currentFrame] + "')";
+
+        currentFrame++;
+        if (currentFrame >= runFrames.length) {
+            currentFrame = 0;
+        }
+    }
+   
     function moveSprite() {
         sprite.style.left = (spriteX - sprite.offsetWidth / 2) + "px";
         sprite.style.top = (spriteY - sprite.offsetHeight / 2) + "px";
