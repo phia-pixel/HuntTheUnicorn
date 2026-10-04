@@ -17,7 +17,9 @@
      <button id="intro-btn">Continue</button>
    </div>
  
-   <div id="unicornbase"></div>
+   <div id="tapestry">
+     <div id="unicornbase"></div>
+   </div>
 
    <script>
        var step = 1;
@@ -47,8 +49,12 @@
     var runSound = new Audio("assets/sound/Horse ISS740.mp3");
 
     var currentFrame = 0;
-    var spriteX = window.innerWidth / 2;
-    var spriteY = window.innerHeight / 2;
+    
+    var tapestry = document.getElementById("tapestry");
+
+    var spriteX = tapestry.clientWidth / 2;
+    var spriteY = tapestry.clientHeight / 2;
+
     var speed = 50;
     var detectionRadiusX = 250;
     var detectionRadiusY = 220;
@@ -57,8 +63,9 @@
 
     moveSprite();
     document.onmousemove = function(event) {
-        var mouseX = event.clientX;
-        var mouseY = event.clientY;
+        var tapestryRect = tapestry.getBoundingClientRect();
+        var mouseX = event.clientX - tapestryRect.left;
+        var mouseY = event.clientY - tapestryRect.top;
         var isMoving = false;
         var diffX = spriteX - mouseX;
         if (diffX < 120 && diffX > -120) {
@@ -97,17 +104,30 @@
     };
 
     function moveSprite() {
-        sprite.style.left = (spriteX - 32) + "px";
-        sprite.style.top = (spriteY - 32) + "px";
+        sprite.style.left = (spriteX - sprite.offsetWidth / 2) + "px";
+        sprite.style.top = (spriteY - sprite.offsetHeight / 2) + "px";
     }
 
+    
     function keepInBounds() {
-        if (spriteX < 32) { spriteX = 32; }
-        if (spriteX > window.innerWidth - 32) { spriteX = window.innerWidth - 32; }
-        if (spriteY < 32) { spriteY = 32; }
-        if (spriteY > window.innerHeight - 32) { spriteY = window.innerHeight - 32; }
+         var spriteHalfX = sprite.offsetWidth / 2;
+         var spriteHalfY = sprite.offsetHeight / 2;
+
+         var minX = spriteHalfX;
+         var maxX = tapestry.clientWidth - spriteHalfX;
+
+         var minY = spriteHalfY;
+         var maxY = tapestry.clientHeight - spriteHalfY;
+
+         spriteX = Math.max(minX, Math.min(spriteX, maxX));
+         spriteY = Math.max(minY, Math.min(spriteY, maxY));
+
     }
 
+    window.addEventListener("resize", function() {
+        keepInBounds();
+        moveSprite();
+    });
 
  </script>
 </body>
