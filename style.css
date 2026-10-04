@@ -1,14 +1,22 @@
 body {
-        background-image: url(assets/images/Tapestry.png);
-        background-repeat: no-repeat;
-        background-position-x: center;
-        background-size: 80%;
-        background-attachment: local;
         background-color: #121212;
         font-family: "Cinzel Decorative", "Cinzel", "Times New Roman", Georgia, serif;
         margin: 0;
         overflow: hidden;    
     }
+
+#tapestry {
+        position: relative;
+        width: min(90vw, 90vh);
+        height: min(90vw, 90vh);
+        margin: auto;
+        top: 5vh;
+    
+        background-image: url(assets/images/Tapestry.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
+}
 
 #intro-overlay {
         position: fixed;
@@ -52,8 +60,8 @@ body {
 
 #unicornbase {
         position: absolute;
-        width: 128px;
-        height: 128px;
+        width: 12%;
+        height: 12%;
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
