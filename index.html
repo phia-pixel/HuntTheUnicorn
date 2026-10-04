@@ -56,6 +56,8 @@
     var spriteY = tapestry.clientHeight / 2;
 
     var speed = 50;
+    var animationTimer = null;
+    var animationSpeed = 100;
     var detectionRadiusX = 250;
     var detectionRadiusY = 220;
 
@@ -90,13 +92,25 @@
         }
 
         if (isMoving) {
-            currentFrame = currentFrame + 1;
+           if (animationTimer === null) {
+            animationTimer = setInterval(function() {
+            currentFrame++;
             if (currentFrame >= runFrames.length) {
-                currentFrame = 0;
+                 currentFrame = 0;
             }
-                sprite.style.backgroundImage = "url('" + runFrames[currentFrame] + "')";
-             } else {
-                sprite.style.backgroundImage = "url('" + idleImage + "')";
+
+            sprite.style.backgroundImage =
+                "url('" + runFrames[currentFrame] + "')";
+            }, animationSpeed);
+            }
+            } else {
+           if (animationTimer !== null) {
+           clearInterval(animationTimer);
+           animationTimer = null;
+            }
+
+            currentFrame = 0;
+            sprite.style.backgroundImage = "url('" + idleImage + "')";
             }
     
         keepInBounds();
