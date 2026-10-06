@@ -94,12 +94,15 @@
         keepInBounds();
 
         if (isMoving) {
-            nextRunFrame();
+            if (animationTimer == null) {
+                animationTimer = setInterval(nextRunFrame, animationSpeed);
+            }
         } else {
+            clearInterval(animationTimer);
+            animationTimer = null;
+
             currentFrame = 0;
-            
-            sprite.style.backgroundImage = 
-                "url('" + idleImage + "')";
+            sprite.style.backgroundImage = "url('" + idleImage + "')"
         }
         
         moveSprite();
